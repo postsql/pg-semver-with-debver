@@ -63,23 +63,10 @@ Datum       get_semver_minor(PG_FUNCTION_ARGS);
 Datum       get_semver_patch(PG_FUNCTION_ARGS);
 Datum       get_semver_prerelease(PG_FUNCTION_ARGS);
 
-/* heap format of version numbers */
-typedef int32 vernum;
-
-/* memory/heap structure (not for binary marshalling) */
-typedef struct semver {
-    int32  vl_len_;  /* varlena header */
-    vernum numbers[3];
-    char   prerel[]; /* pre-release, including the null byte for convenience */
-} semver;
-
-#define PG_GETARG_SEMVER_P(n) (semver *)PG_GETARG_POINTER(n)
+#include "semver.h"
 
 // forward declarations, mostly to shut the compiler up but some are
 // actually necessary.
-char*   emit_semver(semver* version);
-semver* make_semver(const int *numbers, const char* prerel);
-semver* parse_semver(char* str, bool lax, bool throw, bool *bad);
 int     prerelcmp(const char* a, const char* b);
 int     _semver_cmp(semver* a, semver* b);
 char*   strip_meta(const char* str);

@@ -1,0 +1,122 @@
+\set ECHO none
+1..120
+ok 1 - Type debversion should exist
+ok 2 - debversion should be NULLable
+ok 3 - "1.0" is a valid debversion
+ok 4 - "1.2.3" is a valid debversion
+ok 5 - "0.1.0" is a valid debversion
+ok 6 - "0" is a valid debversion
+ok 7 - "0.0.0" is a valid debversion
+ok 8 - "0:1.0" is a valid debversion
+ok 9 - "1:2.3.4" is a valid debversion
+ok 10 - "10:0.1" is a valid debversion
+ok 11 - "00:1.0" is a valid debversion
+ok 12 - "01:2.0" is a valid debversion
+ok 13 - "1.0-1" is a valid debversion
+ok 14 - "1.2.3-0ubuntu1" is a valid debversion
+ok 15 - "1.0-1+deb11u1" is a valid debversion
+ok 16 - "1.0-test-1" is a valid debversion
+ok 17 - "1.0-a-b-c-1" is a valid debversion
+ok 18 - "1:1.0:beta-1" is a valid debversion
+ok 19 - "1.0~rc1-1" is a valid debversion
+ok 20 - "1.0~alpha-1" is a valid debversion
+ok 21 - "1.0-0" is a valid debversion
+ok 22 - "1.0-~1" is a valid debversion
+ok 23 - "20230101" is a valid debversion
+ok 24 - "1.0.0+dfsg-1" is a valid debversion
+ok 25 - "" is not a valid debversion
+ok 26 - "   " is not a valid debversion
+ok 27 - " 1.0" is not a valid debversion
+ok 28 - "1.0 " is not a valid debversion
+ok 29 - " 1.0-1 " is not a valid debversion
+ok 30 - "v1.0" is not a valid debversion
+ok 31 - ":1.0" is not a valid debversion
+ok 32 - "a:1.0" is not a valid debversion
+ok 33 - "1a:1.0" is not a valid debversion
+ok 34 - "-1:1.0" is not a valid debversion
+ok 35 - "1.0-" is not a valid debversion
+ok 36 - "1.0--" is not a valid debversion
+ok 37 - "1.0:1" is not a valid debversion
+ok 38 - "1.0_1" is not a valid debversion
+ok 39 - "1.0@1" is not a valid debversion
+ok 40 - "1.0-1$2" is not a valid debversion
+ok 41 - "1.0#1" is not a valid debversion
+ok 42 - "1.0-1:2" is not a valid debversion
+ok 43 - 0:1.0 = 1.0
+ok 44 - 00:1.0 = 1.0
+ok 45 - 00:1.0-1 = 1.0-01
+ok 46 - 1.0-1 = 0:1.0-01
+ok 47 - 1.0 = 1.00
+ok 48 - 1:1.0 <> 0:1.0
+ok 49 - 1:1.0 > 0:1.0
+ok 50 - 2:1.0 > 1:2.0
+ok 51 - 1.0 < 1.1
+ok 52 - 1.1 < 1.2
+ok 53 - 1.2 < 1.10
+ok 54 - 1.0~rc1 < 1.0
+ok 55 - 1.0~rc1 < 1.0~rc2
+ok 56 - 1.0 < 1.0+git1
+ok 57 - 1.0 < 1.0.1
+ok 58 - 1.0 < 1.0a
+ok 59 - 1.0 < 1.0-1
+ok 60 - 1.0-~1 < 1.0
+ok 61 - 1.0-1 < 1.0-2
+ok 62 - 1.0-1 < 1.0-10
+ok 63 - 1.0-1~bpo < 1.0-1
+ok 64 - 1.0-1 <= 1.0-1
+ok 65 - 1.0-1 >= 1.0-1
+ok 66 - 1.0 < 1.0-0
+ok 67 - 1.0-0 = 1.0-00
+ok 68 - 1.0-0 < 1.0-1
+ok 69 - 1.0-~ < 1.0
+ok 70 - 1.0-~ < 1.0-0
+ok 71 - debversion_cmp <
+ok 72 - debversion_cmp =
+ok 73 - debversion_cmp >
+ok 74 - hash(0:1.0-1) = hash(1.0-1)
+ok 75 - hash(00:1.0-1) = hash(1.0-1)
+ok 76 - hash(0:1.0-01) = hash(1.0-1)
+ok 77 - hash(1.0) = hash(0:1.0)
+ok 78 - hash_extended(0:1.0-1) = hash_extended(1.0-1)
+ok 79 - hash_extended(00:1.0-1) = hash_extended(1.0-1)
+ok 80 - hash_extended(1.0) = hash_extended(0:1.0)
+ok 81 - to_debversion trims whitespace
+ok 82 - to_debversion allows leading v
+ok 83 - to_debversion trims and allows leading v
+ok 84 - to_debversion comparison
+ok 85 - is_debversion valid
+ok 86 - is_debversion rejects leading v in strict mode
+ok 87 - is_debversion rejects illegal chars
+ok 88 - is_debversion rejects empty string
+ok 89 - epoch defaults to 0
+ok 90 - epoch returns 2
+ok 91 - epoch returns 3 for 003
+ok 92 - upstream returns 1.0
+ok 93 - upstream with epoch/tilde
+ok 94 - revision returns 1
+ok 95 - revision returns ubuntu1
+ok 96 - native package revision is NULL
+ok 97 - epoch with 35 zeros returns 0
+ok 98 - epoch with 35 zeros and 5 returns 5
+ok 99 - epoch exceeding 31-bit range throws error
+ok 100 - min aggregate
+ok 101 - max aggregate
+ok 102 - hash index lookup with epoch normalization
+ok 103 - btree index sort order
+ok 104 - hash partitioning routes equivalent versions to same partition
+ok 105 - debversionrange created
+ok 106 - range contains 1.5
+ok 107 - range does not contain 2.5
+ok 108 - constructor range contains 1.5
+ok 109 - semver to debversion cast
+ok 110 - debversion to semver cast
+ok 111 - cannot cast epoch debversion to semver
+ok 112 - cannot cast tilde debversion to semver
+ok 113 - debversion to text cast
+ok 114 - text to debversion cast
+ok 115 - Function debversion_send() should return bytea
+ok 116 - Function debversion_recv(internal) should exist
+ok 117 - Function debversion_recv() should return debversion
+ok 118 - binary copy preserves debversion values
+ok 119 - unprivileged user can use debversion
+ok 120 - unprivileged user can compare debversions

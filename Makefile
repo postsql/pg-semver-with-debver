@@ -10,7 +10,8 @@ DOCS         = $(wildcard doc/*.md)
 TESTS        = $(wildcard test/sql/*.sql)
 REGRESS      = $(patsubst test/sql/%.sql,%,$(TESTS))
 REGRESS_OPTS = --inputdir=test
-MODULES      = src/$(EXTENSION)
+MODULE_big   = $(EXTENSION)
+OBJS         = src/semver.o src/debversion.o src/debver_evr.o
 PG_CONFIG   ?= pg_config
 EXTRA_CLEAN  = sql/$(EXTENSION)--$(EXTVERSION).sql src/$(EXTENSION).c
 PG92         = $(shell $(PG_CONFIG) --version | grep -qE " 8\.| 9\.0| 9\.1" && echo no || echo yes)
