@@ -1,0 +1,54 @@
+--- Debian version type and operators                                -*- sql -*-
+---
+--- Copyright © 2008 Roger Leigh <rleigh@debian.org>
+---
+--- This program is free software: you can redistribute it and/or modify
+--- it under the terms of the GNU General Public License as published by
+--- the Free Software Foundation, either version 2 of the License, or
+--- (at your option) any later version.
+---
+--- This program is distributed in the hope that it will be useful, but
+--- WITHOUT ANY WARRANTY; without even the implied warranty of
+--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+--- General Public License for more details.
+---
+--- You should have received a copy of the GNU General Public License
+--- along with this program.  If not, see
+--- <http://www.gnu.org/licenses/>.
+
+CREATE EXTENSION debversion;
+
+SET client_min_messages = warning; -- suppress "pkey created" message
+CREATE TABLE versions (
+  ver debversion
+    CONSTRAINT versions_pkey PRIMARY KEY
+);
+RESET client_min_messages;
+
+INSERT INTO versions (ver) VALUES ('4.1.5-2');
+INSERT INTO versions (ver) VALUES ('4.0.2-1');
+INSERT INTO versions (ver) VALUES ('4.1.4-1');
+INSERT INTO versions (ver) VALUES ('4.1.5-1');
+INSERT INTO versions (ver) VALUES ('4.2.0-1');
+INSERT INTO versions (ver) VALUES ('4.1.4-2');
+INSERT INTO versions (ver) VALUES ('4.1.5-2.01');
+INSERT INTO versions (ver) VALUES ('4.1.99-a2-1');
+INSERT INTO versions (ver) VALUES ('5.2.1-2');
+INSERT INTO versions (ver) VALUES ('5.0.0-3');
+INSERT INTO versions (ver) VALUES ('5.1.98.2-2');
+INSERT INTO versions (ver) VALUES ('3.1.4-1');
+INSERT INTO versions (ver) VALUES ('5.2.3-1');
+INSERT INTO versions (ver) VALUES ('0:5.2.2-1');
+INSERT INTO versions (ver) VALUES ('0:5.2.4-1');
+INSERT INTO versions (ver) VALUES ('1:3.2.3-1');
+
+SELECT * FROM versions ORDER BY ver;
+SELECT min(ver) FROM versions;
+SELECT max(ver) FROM versions;
+
+-- PK violations
+INSERT INTO versions (ver) VALUES ('0:4.1.5-2');
+INSERT INTO versions (ver) VALUES ('04.1.5-2');
+INSERT INTO versions (ver) VALUES ('4.01.5-2');
+INSERT INTO versions (ver) VALUES ('4.1.05-2');
+INSERT INTO versions (ver) VALUES ('4.1.5-02');
